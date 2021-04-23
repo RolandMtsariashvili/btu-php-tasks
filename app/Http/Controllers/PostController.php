@@ -27,16 +27,6 @@ class PostController extends Controller
 
     public function store(Request $request) {
 
-//        Post::create([
-//            'title' => $request->get('title'),
-//            'text' => $request->get('text'),
-//            'author_email' => $request->get('author_email'),
-//        ]);
-
-//        dd($request->all());
-//        $post = new Post();
-//
-//        $post->create($request->all());
         $post = new Post();
         $post->title = $request->get('title');
         $post->text = $request->get('text');
@@ -44,6 +34,28 @@ class PostController extends Controller
         $post->save();
 
 
+        return redirect()->back();
+    }
+
+    public function edit($id) {
+        $post = Post::findOrFail($id);
+        return view('posts.edit', compact('post'));
+    }
+
+    public function update(Request $request, $id) {
+        $post = Post::findOrFail($id);
+
+        $post->title = $request->get('title');
+        $post->text = $request->get('text');
+        $post->author_email = $request->get('author_email');
+        $post->save();
+
+        return redirect()->back();
+    }
+
+    public function delete($id) {
+        $post = Post::findOrFail($id);
+        $post->delete();
         return redirect()->back();
     }
 }
