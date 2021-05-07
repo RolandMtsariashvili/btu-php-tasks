@@ -19,6 +19,8 @@ Route::get('/', function () {
 
 Route::get('/posts', [\App\Http\Controllers\PostController::class, 'index']);
 
+Route::get('/posts/list', [\App\Http\Controllers\PostController::class, 'list'])->name('posts.list');
+
 Route::post('/posts/store', [\App\Http\Controllers\PostController::class, 'store'])->name('posts.store');
 
 Route::get('/posts/create', [\App\Http\Controllers\PostController::class, 'create']);
